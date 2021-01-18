@@ -1,0 +1,6 @@
+type ShoppingList @model {
+  id: ID!
+  itemName: String!
+  user: String!
+  description: String
+}

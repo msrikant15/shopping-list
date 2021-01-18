@@ -38,7 +38,7 @@ function App() {
         <Grid container spacing={3}>
         
             <AboutCard 
-              text = "This is an application I made during CCA x CISSA's AWS event!"
+              text = "This is an intelligent shopping list!"
               />
             
              <AddItemCard 

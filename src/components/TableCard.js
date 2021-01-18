@@ -21,13 +21,13 @@ const TableCard = ({
           <TableBody>
             {data.map( item => {
               return (
-                <TableRow>
+                <TableRow key={item.id}>
                   <TableCell>
                     {item.itemName}
                   </TableCell>
                   <TableCell align="right">
                     <IconButton
-                      onClick={()=>removeAction(item.timestamp)}
+                      onClick={()=>removeAction(item.id)}
                     > 
                       <DeleteIcon />
                     </IconButton>

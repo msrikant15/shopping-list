@@ -47,10 +47,7 @@ function App() {
                 const response = await addItem(itemName)
                 
                 if (response){
-                  setItems([...items, {
-                    timestamp: new Date().getTime(),
-                    itemName
-                  }])  
+                  setItems([...items, response])  
                 }
                 
               }
@@ -73,10 +70,10 @@ function App() {
             
            <TableCard 
               data={items}
-              removeAction={async (timestamp)=>{
-                const response = await deleteItem(timestamp)
+              removeAction={async (id)=>{
+                const response = await deleteItem(id)
                 if (response) {
-                  setItems(items.filter(item => item.timestamp !== timestamp))  
+                  setItems(items.filter(item => item.id !== id))  
                 }
               }}
             />

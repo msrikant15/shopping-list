@@ -9,7 +9,7 @@ const NavBar = ({
   const [taskName, setTaskName] = useState()
 
   return (
-    <Grid item md={6} xs ={12}>
+    <Grid item xs={12}>
       <Paper className="card fixedHeight">
           <TextField
             label="Item"

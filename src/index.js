@@ -12,6 +12,8 @@ import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
 
 Amplify.configure(config);
+import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
+Amplify.addPluggable(new AmazonAIPredictionsProvider());
 
 const darkTheme = createMuiTheme({
   palette: {

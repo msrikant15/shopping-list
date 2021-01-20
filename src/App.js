@@ -6,7 +6,6 @@ import TableCard from './components/TableCard'
 import NavBar from './components/NavBar'
 import AddItemCard from './components/AddItemCard'
 import PredictionsCard from './components/PredictionsCard'
-import AboutCard from './components/AboutCard'
 import { Hub } from 'aws-amplify';
 import { Grid } from '@material-ui/core'
 
@@ -37,21 +36,18 @@ function App() {
       <div className="content">
         <Grid container spacing={3}>
         
-            <AboutCard 
-              text = "This is an intelligent shopping list!"
-              />
-            
-             <AddItemCard 
-            addAction = {
-              async (itemName) => {
-                const response = await addItem(itemName)
-                
-                if (response){
-                  setItems([...items, response])  
+            <AddItemCard 
+              addAction = {
+                async (itemName) => {
+                  const response = await addItem(itemName)
+                  
+                  if (response){
+                    setItems([...items, response])  
+                  }
+                  
                 }
-                
-              }
-            }      />
+              }     
+            />
             
             <PredictionsCard 
               addAction = {

@@ -5,21 +5,18 @@ import App from './App';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import * as serviceWorker from './serviceWorker';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import orange from '@material-ui/core/colors/orange';
 
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
-
-Amplify.configure(config);
 import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
+
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
+Amplify.configure(config);
+
 
 const darkTheme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: orange,
-  }
+  palette: 'primary'
 });
 
 ReactDOM.render(

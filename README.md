@@ -13,15 +13,12 @@ Run `npm start` to see the UI frontend
 
 ## Install Amplify CLI, Initialize the project and add necessary libraries
 
-Install the Amplify CLI globally
+**Install the Amplify CLI globally**
 
 `npm install -g @aws-amplify/cli`
 
-Install Amplify javascript libraries needed from within the root folder of the repository
 
-`npm install --save aws-amplify @aws-amplify/ui-react`
-
-After the libraries are installed, initialize Amplify in the project from the root folder using
+**Initialize Amplify in the project from the root folder**
 
 `amplify init`
 
@@ -29,9 +26,9 @@ After the libraries are installed, initialize Amplify in the project from the ro
 
 ```
 
-? Enter a name for the project kycapp
-? Enter a name for the environment master
-? Choose your default editor: None
+? Enter a name for the project shopping-list
+? Enter a name for the environment dev
+? Choose your default editor: vscode
 ? Choose the type of app that you are building: javascript
 
 Please tell us about your project
@@ -52,5 +49,8 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
 ```
 
+**Install Amplify javascript libraries needed from within the root folder of the repository**
+
+`npm install --save aws-amplify @aws-amplify/ui-react`
 
 

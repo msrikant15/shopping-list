@@ -55,21 +55,30 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
 ## Add Authentication
 
-**Add authentication to the app using the command**
+**Add authentication backend to the app using the command**
 
 `amplify add auth`
 
 **Follow the steps below for inputs**
 
-**➡️ Select Default Configuration** when asked if you'd like to use the default authentication and security configuration
+```
+Select Default Configuration when asked if you'd like to use the default authentication and security configuration.
    
-**➡️ Select Username** when asked how you want users to sign in
+Select Username when asked how you want users to sign in.
    
-**➡️ Select "No, I am done."** when asked about advanced settings.
+Select "No, I am done." when asked about advanced settings.
 
-**➡️ Run** `amplify push` and confirm with a 'Yes' to create these changes in the cloud
+Run `amplify push` and confirm with a 'Yes' to create these changes in the cloud.
 
-**➡️ Confirm** you want Amplify to make changes in the cloud for you.
+Confirm you want Amplify to make changes in the cloud for you.
+```
 
-Wait for the provisioning to complete. This will take a few minutes.
+Wait for the provisioning to complete. This will take a few minutes. The above steps creates an Authentication backend provider using Cognito user and identity pools and connects that with the Amplify project.
+
+**Add authentication front-end**
+
+
+
+
+
 

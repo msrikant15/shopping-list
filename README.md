@@ -61,10 +61,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
 **Follow the steps below for inputs**
 
-
-```
-
-1. **➡️ Select Default Configuration** when asked if you'd like to use the default authentication and security configuration
+**➡️ Select Default Configuration** when asked if you'd like to use the default authentication and security configuration
    
 **➡️ Select Username** when asked how you want users to sign in
    
@@ -73,8 +70,6 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 **➡️ Run** `amplify push` and confirm with a 'Yes' to create these changes in the cloud
 
 **➡️ Confirm** you want Amplify to make changes in the cloud for you.
-
-```
 
 Wait for the provisioning to complete. This will take a few minutes.
 

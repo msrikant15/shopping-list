@@ -6,13 +6,16 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import * as serviceWorker from './serviceWorker';
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
-import { Amplify } from 'aws-amplify';
-import config from './aws-exports';
-import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 
-Amplify.addPluggable(new AmazonAIPredictionsProvider());
-Amplify.configure(config);
+// import { Amplify } from 'aws-amplify';
+// import config from './aws-exports';
+// Amplify.configure(config);
+
+// import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
+// import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
+
+// Amplify.addPluggable(new AmazonAIPredictionsProvider());
+
 
 
 const darkTheme = createMuiTheme({

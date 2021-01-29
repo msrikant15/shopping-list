@@ -77,8 +77,28 @@ Wait for the provisioning to complete. This will take a few minutes. The above s
 
 **Add authentication front-end**
 
+Open the file index.js and add the below line to import the AmplifyAuthenticator component
 
+`import { AmplifyAuthenticator } from '@aws-amplify/ui-react';`
 
+Replace the `<App />` component in the same file with `<AmplifyAuthenticator><App /></AmplifyAuthenticator>`. 
 
+AmplifyAuthenticator is a React higher-order component that adds sign-in, sign-up features into a React App. Reloading the App should now show you the signup functionality
+
+## Add the backend database and an API to interact with the DB
+
+The backend will consist of a dynamodb database and a graphql API that integrates with DynamoDb. We will use Amplify to create the necessary infrastructure. 
+
+**Add the api and backend to the app using the command**
+
+`amplify add api`
+
+**Follow the steps below for inputs**
+
+```
+
+   
+
+```
 
 

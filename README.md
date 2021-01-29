@@ -176,7 +176,7 @@ export async function deleteItem(itemId) {
 ```
 You should now be able to see the add, list and delete features working in the front end. 
 
-## Add Intelligence by integarting with Amazon Rekognition
+## Add Intelligence by integrating with Amazon Rekognition
 
 We will now see how we can interface with Amazon Rekognition to easily add object detetions and use an image to create a list of items that can be easily added to our shopping list. 
 

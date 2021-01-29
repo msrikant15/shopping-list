@@ -228,6 +228,6 @@ Select the Identify category
         })
     }
  ```
- You should now be able to pick and image, recognize objects wihin and add those into your shopping list !!
+ You should now be able to pick an image, recognize objects within and add those into your shopping list !!
 
 

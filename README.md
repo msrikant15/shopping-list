@@ -127,9 +127,56 @@ Use the following inputs
 ? Do you want to generate/update all possible GraphQL operations - queries, mutations and subscriptio
 ns Yes
 ? Enter maximum statement depth [increase from default if your schema is deeply nested] 2
+```
+**Integrate the API to front-end**
 
-   
+Now we will have the necessary infrasttucture to integrate our front end code. We will also be able to import the generate graphql queries and mutations for easy integration into AppSync. Since we need to have a way to identify a user with each item, we will also use the Auth library. Import the libraries and add necessary code for integration
 
 ```
+    import { API, Auth } from "aws-amplify";
+    import * as mutations from '../graphql/mutations';
+    import * as queries from '../graphql/queries';
+
+    // This function is called immediately when the page loads, before populating the table with this data
+    export async function getUserItems() {
+        let shopList = await API.graphql({ query: queries.listShoppingListItems});
+        console.log(shopList.data)
+        return shopList.data.listShoppingListItems.items
+    }
+
+    // This function is called when a user clicks the button 'Add'
+    export async function addItem(itemName) {
+    
+    // get the user info
+    let userInfo = await Auth.currentUserInfo();
+
+    // create json input for GraphQL
+    let itemDetails = {
+        itemName: itemName,
+        user: userInfo.id
+    };
+
+    let addedItem = await API.graphql({ query: mutations.createShoppingListItem, variables: {input: itemDetails}});
+    console.log("Added ", addedItem)
+    return addedItem.data.createShoppingListItem;
+}
+
+// This function is called when a user deletes an existing item in the table
+export async function deleteItem(itemId) {
+    console.log("Deleting ", itemId)
+
+    let itemDetails = {
+        id: itemId
+    };
+
+    let deletedItem = await API.graphql({ query: mutations.deleteShoppingListItem, variables: {input: itemDetails}});
+    console.log("Deleted ", deletedItem)
+    return deletedItem;
+}
+
+```
+
+
+
 
 

@@ -6,7 +6,7 @@ import TableCard from './components/TableCard'
 import NavBar from './components/NavBar'
 import AddItemCard from './components/AddItemCard'
 import PredictionsCard from './components/PredictionsCard'
-import { Hub } from 'aws-amplify';
+// import { Hub } from 'aws-amplify';
 import { Grid } from '@material-ui/core'
 
 
@@ -23,11 +23,13 @@ function App() {
     setItems(await getUserItems())
   }
   
+  /*
   Hub.listen('auth', (data) => {
     if (data.payload.event === 'signIn') {
       fetchData()
     }
   });
+  */
 
   return (
     <div className="app">

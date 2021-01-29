@@ -1,6 +1,6 @@
 // This function is called immediately when the page loads, before populating the table with this data
 export async function getUserItems() {
-    
+    return []
 }
 
 // This function is called when a user clicks the button 'Add'

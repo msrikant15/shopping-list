@@ -109,7 +109,6 @@ type ShoppingListItem @model {
   id: ID!
   itemName: String!
   user: String!
-  description: String
 }
 ```
 

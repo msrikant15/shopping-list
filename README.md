@@ -51,7 +51,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
 **Install Amplify javascript libraries needed from within the root folder of the repository**
 
-`npm install --save aws-amplify @aws-amplify/ui-react`
+`npm install --save aws-amplify@3.3.14 @aws-amplify/ui-react@0.2.34`
 
 ## Add Authentication
 
@@ -190,8 +190,8 @@ Use the following inputs
 
 ```
 Select the Identify category
-? What would you like to identify? Identify Entities
-? Provide a friendly name for your resource identifyEntities51af18d8
+? What would you like to identify? Identify Labels
+? Provide a friendly name for your resource: 
 ? Would you like use the default configuration? Default Configuration
 ? Who should have access? Auth users only
 ```

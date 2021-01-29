@@ -96,6 +96,37 @@ The backend will consist of a dynamodb database and a graphql API that integrate
 **Follow the steps below for inputs**
 
 ```
+Select GraphQL
+Provide API Name:[default]
+Choose the default authorization type for the API:Amazon Cognito User Pool 
+Do you have an annotated GraphQL schema? N
+Choose a schema template: Single object with fields
+```
+The above will ceate the necessary Cloudformation scripts locally to create AppSync GraphQL infrastructure. Edit the Todo Schema and replace the same to ShoppingListItem below. 
+
+```
+type ShoppingListItem @model {
+  id: ID!
+  itemName: String!
+  user: String!
+  description: String
+}
+```
+
+
+To deploy the infrastructure to the backend run
+
+`amplify push`
+
+Use the following inputs 
+
+```
+? Do you want to generate code for your newly created GraphQL API Yes
+? Choose the code generation language target javascript
+? Enter the file name pattern of graphql queries, mutations and subscriptions src/graphql/**/*.js
+? Do you want to generate/update all possible GraphQL operations - queries, mutations and subscriptio
+ns Yes
+? Enter maximum statement depth [increase from default if your schema is deeply nested] 2
 
    
 

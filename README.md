@@ -1,70 +1,233 @@
-# Getting Started with Create React App
+## Get Started by cloning the repo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`git clone git@github.com:sathishc/shopping-list.git`
 
-## Available Scripts
 
-In the project directory, you can run:
+## Install the necessary npm packages
 
-### `yarn start`
+`npm install`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Now you will have a frontend that includes just the React front-end. We are using React-Material-UI components to style the front-end. This is just boiler plate code without any backend integrations into AWS. In the repo, you fill find the files 'predictions.js' and 'db.js' under src/api folders. We will add code here after deploying the necessary backends using Amplify 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Run `npm start` to see the UI frontend
 
-### `yarn test`
+## Install Amplify CLI, Initialize the project and add necessary libraries
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Install the Amplify CLI globally**
 
-### `yarn build`
+`npm install -g @aws-amplify/cli`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Initialize Amplify in the project from the root folder**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`amplify init`
 
-### `yarn eject`
+**Follow the steps below for inputs**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+? Enter a name for the project shopping-list
+? Enter a name for the environment dev
+? Choose your default editor: vscode
+? Choose the type of app that you are building: javascript
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Please tell us about your project
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+? What javascript framework are you using: react
+? Source Directory Path:  src
+? Distribution Directory Path: build
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
 
-## Learn More
+Using default provider  awscloudformation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+For more information on AWS Profiles, see:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+? Do you want to use an AWS profile? Yes
+? Please choose the profile you want to use default
 
-### Code Splitting
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Install Amplify javascript libraries needed from within the root folder of the repository**
 
-### Analyzing the Bundle Size
+`npm install --save aws-amplify @aws-amplify/ui-react`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Add Authentication
 
-### Making a Progressive Web App
+**Add authentication backend to the app using the command**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`amplify add auth`
 
-### Advanced Configuration
+**Follow the steps below for inputs**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+Select Default Configuration when asked if you'd like to use the default authentication and security configuration.
+   
+Select Username when asked how you want users to sign in.
+   
+Select "No, I am done." when asked about advanced settings.
 
-### Deployment
+Run `amplify push` and confirm with a 'Yes' to create these changes in the cloud.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Confirm you want Amplify to make changes in the cloud for you.
+```
 
-### `yarn build` fails to minify
+Wait for the provisioning to complete. This will take a few minutes. The above steps creates an Authentication backend provider using Cognito user and identity pools and connects that with the Amplify project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Add authentication front-end**
+
+Open the file index.js and add the below line to import the AmplifyAuthenticator component
+
+`import { AmplifyAuthenticator } from '@aws-amplify/ui-react';`
+
+Replace the `<App />` component in the same file with `<AmplifyAuthenticator><App /></AmplifyAuthenticator>`. 
+
+AmplifyAuthenticator is a React higher-order component that adds sign-in, sign-up features into a React App. Reloading the App should now show you the signup functionality
+
+## Add the backend database and an API to interact with the DB
+
+The backend will consist of a dynamodb database and a graphql API that integrates with DynamoDb. We will use Amplify to create the necessary infrastructure. 
+
+**Add the api and backend to the app using the command**
+
+`amplify add api`
+
+**Follow the steps below for inputs**
+
+```
+Select GraphQL
+Provide API Name:[default]
+Choose the default authorization type for the API:Amazon Cognito User Pool 
+Do you have an annotated GraphQL schema? N
+Choose a schema template: Single object with fields
+```
+The above will ceate the necessary Cloudformation scripts locally to create AppSync GraphQL infrastructure. Edit the Todo Schema and replace the same to ShoppingListItem below. 
+
+```
+type ShoppingListItem @model {
+  id: ID!
+  itemName: String!
+  user: String!
+}
+```
+
+
+To deploy the infrastructure to the backend run
+
+`amplify push`
+
+Use the following inputs 
+
+```
+? Do you want to generate code for your newly created GraphQL API Yes
+? Choose the code generation language target javascript
+? Enter the file name pattern of graphql queries, mutations and subscriptions src/graphql/**/*.js
+? Do you want to generate/update all possible GraphQL operations - queries, mutations and subscriptio
+ns Yes
+? Enter maximum statement depth [increase from default if your schema is deeply nested] 2
+```
+**Integrate the API to front-end**
+
+Now we will have the necessary infrasttucture to integrate our front end code. We will also be able to import the generate graphql queries and mutations for easy integration into AppSync. Since we need to have a way to identify a user with each item, we will also use the Auth library. Import the libraries and add necessary code for integration
+
+```
+    import { API, Auth } from "aws-amplify";
+    import * as mutations from '../graphql/mutations';
+    import * as queries from '../graphql/queries';
+
+    // This function is called immediately when the page loads, before populating the table with this data
+    export async function getUserItems() {
+        let shopList = await API.graphql({ query: queries.listShoppingListItems});
+        console.log(shopList.data)
+        return shopList.data.listShoppingListItems.items
+    }
+
+    // This function is called when a user clicks the button 'Add'
+    export async function addItem(itemName) {
+    
+    // get the user info
+    let userInfo = await Auth.currentUserInfo();
+
+    // create json input for GraphQL
+    let itemDetails = {
+        itemName: itemName,
+        user: userInfo.id
+    };
+
+    let addedItem = await API.graphql({ query: mutations.createShoppingListItem, variables: {input: itemDetails}});
+    console.log("Added ", addedItem)
+    return addedItem.data.createShoppingListItem;
+}
+
+// This function is called when a user deletes an existing item in the table
+export async function deleteItem(itemId) {
+    console.log("Deleting ", itemId)
+
+    let itemDetails = {
+        id: itemId
+    };
+
+    let deletedItem = await API.graphql({ query: mutations.deleteShoppingListItem, variables: {input: itemDetails}});
+    console.log("Deleted ", deletedItem)
+    return deletedItem;
+}
+
+```
+You should now be able to see the add, list and delete features working in the front end. 
+
+## Add Intelligence by integarting with Amazon Rekognition
+
+We will now see how we can interface with Amazon Rekognition to easily add object detetions and use an image to create a list of items that can be easily added to our shopping list. 
+
+**Add Rekognition backend by using the Predictions category**
+
+Amplify provided predictions category allows us to quickly integrate Amazon AI services to oour front ends. To add object recognition start by adding tha backednd using 
+
+`amplify add predictions`
+
+Use the following inputs 
+
+```
+Select the Identify category
+? What would you like to identify? Identify Entities
+? Provide a friendly name for your resource identifyEntities51af18d8
+? Would you like use the default configuration? Default Configuration
+? Who should have access? Auth users only
+```
+ Run `amplify push` to create the necessary backend infrastructure
+
+ **Integrate Predictions to the front end**
+
+ To enable the predictions category we need to add a Predictions provider to the Amplify and allow it to use the configuration with aws_exports. 
+
+ Import the provider
+
+ `import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';`
+
+ .. and add the provider as an Amplify pluggable component
+
+ `Amplify.addPluggable(new AmazonAIPredictionsProvider());`
+
+ Now update the predictions.js file with the following
+
+ ```
+    import { Predictions } from 'aws-amplify';
+    export const getLabelsFromImage = async(file) => {
+        const predictions = await Predictions.identify({
+            labels: {
+                source: {
+                    file,
+                },
+                type: "ALL"
+            }
+        })
+
+        return predictions.labels.map(item => {
+            return item.name
+        })
+    }
+ ```
+ You should now be able to pick and image, recognize objects wihin and add those into your shopping list !!
+
+

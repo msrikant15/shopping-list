@@ -175,8 +175,60 @@ export async function deleteItem(itemId) {
 }
 
 ```
+You should now be able to see the add, list and delete features working in the front end. 
 
+## Add Intelligence by integarting with Amazon Rekognition
 
+We will now see how we can interface with Amazon Rekognition to easily add object detetions and use an image to create a list of items that can be easily added to our shopping list. 
 
+**Add Rekognition backend by using the Predictions category**
+
+Amplify provided predictions category allows us to quickly integrate Amazon AI services to oour front ends. To add object recognition start by adding tha backednd using 
+
+`amplify add predictions`
+
+Use the following inputs 
+
+```
+Select the Identify category
+? What would you like to identify? Identify Entities
+? Provide a friendly name for your resource identifyEntities51af18d8
+? Would you like use the default configuration? Default Configuration
+? Who should have access? Auth users only
+```
+ Run `amplify push` to create the necessary backend infrastructure
+
+ **Integrate Predictions to the front end**
+
+ To enable the predictions category we need to add a Predictions provider to the Amplify and allow it to use the configuration with aws_exports. 
+
+ Import the provider
+
+ `import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';`
+
+ .. and add the provider as an Amplify pluggable component
+
+ `Amplify.addPluggable(new AmazonAIPredictionsProvider());`
+
+ Now update the predictions.js file with the following
+
+ ```
+    import { Predictions } from 'aws-amplify';
+    export const getLabelsFromImage = async(file) => {
+        const predictions = await Predictions.identify({
+            labels: {
+                source: {
+                    file,
+                },
+                type: "ALL"
+            }
+        })
+
+        return predictions.labels.map(item => {
+            return item.name
+        })
+    }
+ ```
+ You should now be able to pick and image, recognize objects wihin and add those into your shopping list !!
 
 

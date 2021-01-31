@@ -105,10 +105,9 @@ Choose a schema template: Single object with fields
 The above will ceate the necessary Cloudformation scripts locally to create AppSync GraphQL infrastructure. Edit the Todo Schema and replace the same to ShoppingListItem below. 
 
 ```
-type ShoppingListItem @model {
+type ShoppingListItem @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   itemName: String!
-  user: String!
 }
 ```
 
@@ -132,46 +131,48 @@ ns Yes
 Now we will have the necessary infrasttucture to integrate our front end code. We will also be able to import the generate graphql queries and mutations for easy integration into AppSync. Since we need to have a way to identify a user with each item, we will also use the Auth library. Import the libraries and add necessary code for integration
 
 ```
-    import { API, Auth } from "aws-amplify";
+    import { API } from "aws-amplify";
     import * as mutations from '../graphql/mutations';
     import * as queries from '../graphql/queries';
 
     // This function is called immediately when the page loads, before populating the table with this data
     export async function getUserItems() {
+        
         let shopList = await API.graphql({ query: queries.listShoppingListItems});
         console.log(shopList.data)
         return shopList.data.listShoppingListItems.items
+        
     }
 
     // This function is called when a user clicks the button 'Add'
     export async function addItem(itemName) {
     
-    // get the user info
-    let userInfo = await Auth.currentUserInfo();
+        // create json input for GraphQL
+        let itemDetails = {
+            itemName: itemName,
+        };
 
-    // create json input for GraphQL
-    let itemDetails = {
-        itemName: itemName,
-        user: userInfo.id
-    };
+        let addedItem = await API.graphql({ query: mutations.createShoppingListItem, variables: {input: itemDetails}});
+        console.log("Added ", addedItem)
+        return addedItem.data.createShoppingListItem;
+        
+    }
 
-    let addedItem = await API.graphql({ query: mutations.createShoppingListItem, variables: {input: itemDetails}});
-    console.log("Added ", addedItem)
-    return addedItem.data.createShoppingListItem;
-}
+    // This function is called when a user deletes an existing item in the table
+    export async function deleteItem(itemId) {
 
-// This function is called when a user deletes an existing item in the table
-export async function deleteItem(itemId) {
-    console.log("Deleting ", itemId)
+        // return
 
-    let itemDetails = {
-        id: itemId
-    };
+        console.log("Deleting ", itemId)
 
-    let deletedItem = await API.graphql({ query: mutations.deleteShoppingListItem, variables: {input: itemDetails}});
-    console.log("Deleted ", deletedItem)
-    return deletedItem;
-}
+        let itemDetails = {
+            id: itemId
+        };
+
+        let deletedItem = await API.graphql({ query: mutations.deleteShoppingListItem, variables: {input: itemDetails}});
+        console.log("Deleted ", deletedItem)
+        return deletedItem;
+    }
 
 ```
 You should now be able to see the add, list and delete features working in the front end. 
@@ -229,5 +230,18 @@ Select the Identify category
     }
  ```
  You should now be able to pick an image, recognize objects within and add those into your shopping list !!
+
+ ## Add Hosting
+
+ Until now we have just provisioned backend and connected from a local front-end. Now we will host the front-end using Amplify.
+
+ Use the command `amplify add hosting` and follow the steps
+
+ ```
+ Select Hosting with Amplify Console
+ Choose a type Manual deployment
+ ```
+
+ After providing the options type `amplify publish`
 
 

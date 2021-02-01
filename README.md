@@ -257,4 +257,12 @@ Select the Identify category
 
  After providing the options type `amplify publish`. This step packages the front end and deploys the necessary binaries into a hosted Amplify frontend. The output of this command will be the url where the App is hosted on AWS.
 
+## Cleanup
 
+If you are just trying our Amplify and its features, you may want to cleanup the provisioned resources using
+
+`amplify delete`
+
+The features demonstrated is just the small subset of the various categories available. You may also want to try experimenting with categories like analytics, search and other AI features like translation, chatbots, etc.
+
+Have fun and build on !

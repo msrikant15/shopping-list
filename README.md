@@ -1,3 +1,7 @@
+## Architecture 
+
+![Shopping List Architecture](public/Architecture.png)
+
 ## Get Started by cloning the repo
 
 `git clone git@github.com:sathishc/shopping-list.git`

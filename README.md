@@ -13,7 +13,7 @@ The below diagram shows the architecture of the App - A react front-end app util
 
 ## Get Started by cloning the repo
 
-`git clone git@github.com:sathishc/shopping-list.git`
+`git clone https://github.com/sathishc/shopping-list.git`
 
 
 ## Install the necessary npm packages

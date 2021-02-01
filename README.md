@@ -215,7 +215,7 @@ Select the Identify category
 
  To enable the predictions category we need to add a Predictions provider to the Amplify and allow it to use the configuration with aws_exports. 
 
- Import the provider
+ Import the provider (in the index.js file)
 
  `import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';`
 
@@ -223,7 +223,7 @@ Select the Identify category
 
  `Amplify.addPluggable(new AmazonAIPredictionsProvider());`
 
- Now update the predictions.js file with the following
+ Now update the api/predictions.js file with the following
 
  ```
     import { Predictions } from 'aws-amplify';

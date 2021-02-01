@@ -14,7 +14,7 @@ const PredictionsCard = ({
     <Grid item xs={12}>
         <Paper className="card">
           <Grid item xs={12} style={{paddingBottom: '10px'}}>
-            <b>Use AI Predictions to Add New Items</b>
+            <b>Use AI Object Detection to Add New Items</b>
           </Grid>
           <Grid item xs={12}>
             <Button

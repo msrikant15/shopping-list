@@ -246,6 +246,6 @@ Select the Identify category
  Choose a type Manual deployment
  ```
 
- After providing the options type `amplify publish`
+ After providing the options type `amplify publish`. This step packages the front end and deploys the necessary binaries into a hosted Amplify frontend. The output of this command will be the url where the App is hosted on AWS.
 
 

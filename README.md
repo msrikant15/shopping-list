@@ -2,7 +2,7 @@
 
 In this demo, we are building a we App that allows you to create a personal shopping list that can be accessd from the web. The list can be updated manually or by uploading an image from where the app can detect items that the user can quickly choose from to add to the list. The front end we will build in shown.
 
-![Shopping List Frontend](public/shopping-list.png)
+![Shopping List Frontend](public/shopping-list.png | width=100)
 
 
 ## Architecture 

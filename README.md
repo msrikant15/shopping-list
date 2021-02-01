@@ -1,4 +1,13 @@
+## What we are building
+
+In this demo, we are building a we App that allows you to create a personal shopping list that can be accessd from the web. The list can be updated manually or by uploading an image from where the app can detect items that the user can quickly choose from to add to the list. The front end we will build in shown.
+
+![Shopping List Frontend](public/shopping-list.png)
+
+
 ## Architecture 
+
+The below diagram shows the architecture of the App - A react front-end app utilizes AppSync graphql server to create, read, delete items to a DynamoDB database. We also have an integration with Amazon Rekognition to detect objects in images that can be used as labels to create the shopping list items. 
 
 ![Shopping List Architecture](public/Architecture.png)
 
